@@ -23,13 +23,21 @@ Feature: Smoke
       | homePage              |
       | https://www.ebay.com/ |
 
+  Scenario Outline: Check that advanced search page contain all required fields
+    Given User opens '<homePage>' page
+    When User clicks on advanced search button
+    Then User checks first search  button visibility
+    Examples:
+      | homePage              |
+      | https://www.ebay.com/ |
+
   Scenario Outline: Check that search results list contain <quantity> items
     Given User opens '<homePage>' page
     When User fill out search field with '<keyWord>'
     Then User checks that search result list contains '<quantity>' of items
     Examples:
       | homePage              | quantity | keyWord |
-      | https://www.ebay.com/ | 61       | iphone  |
+      | https://www.ebay.com/ | 63       | iphone  |
 
   Scenario Outline: Check that user is able to add chosen item to cart
     Given User opens '<homePage>' page
@@ -49,7 +57,6 @@ Feature: Smoke
     When User chooses network category
     And User chooses iPhone model
     Then User check that all products in search list contains products with '<word>' from chosen category
-
 
     Examples:
       | homePage              | keyWord | word     |
@@ -77,9 +84,6 @@ Feature: Smoke
     And User clicks on sign in button on sign in page
     Then User verify that sign in button contains '<loginName>' on home page
 
-
-
-
     Examples:
       | homePage              | email             | password | loginName |
       | https://www.ebay.com/ | bodacuk@gmail.com | 985236bo | Богдан    |
@@ -89,12 +93,11 @@ Feature: Smoke
     And User clicks on sign in button
     When User fill out username field with incorrect '<email>' username
     And User clicks on sign in button on sign in page
-    Then User verify that '<errorMessage>' is appeared on sign in page
-
+    Then User verify that '<errorMessage>' appeared on login page
 
     Examples:
-      | homePage              | email            | errorMessage             |
-      | https://www.ebay.com/ | bodacukgmail.com | Oops, that's not a match |
+      | homePage              | email            | errorMessage |
+      | https://www.ebay.com/ | bodacukgmail.com | not a match  |
 
   Scenario Outline: Check that user error message appears when user enters the wrong password when sign-in to account
     Given User opens '<homePage>' page
@@ -103,20 +106,29 @@ Feature: Smoke
     And User clicks on sign in button on sign in page
     And User fill out password field with '<password>'
     And User clicks on sign in button on sign in page
-    Then User verify that '<errorMessage>' is appeared on sign in page
+    Then User verify that '<errorMessage>' appeared on login page
+
+
 
     Examples:
-      | homePage              | email            | password     | errorMessage            |
-      | https://www.ebay.com/ | bodacukgmail.com | 456445464564 | ops, that's not a match |
+      | homePage              | email             | password     | errorMessage |
+      | https://www.ebay.com/ | bodacuk@gmail.com | 456445464564 | not a match  |
+
+  Scenario Outline: Check that user is able add to watch list product
+    Given User opens '<homePage>' page
+    And User fill out search field with '<keyWord>'
+    And  User chooses network checkBox category on search results page
+    When User chooses product from list on search result page
+    And User clicks add to watchList button on product page
+    And User fill out username field with incorrect '<email>' username
+    And User clicks on sign in button on sign in page
+    And User fill out password field with '<password>'
+    And User clicks on sign in button on sign in page
+
+    Examples:
+      | homePage              | keyWord | email             | password |
+      | https://www.ebay.com/ | iphone  | bodacuk@gmail.com | 985236bo |
 
 
 
 
-#  Scenario Outline: Check add product to wishlist
-#    Given User opens '<homePage>' page
-#    And User checks search field visibility
-#    When User makes search by keyword '<keyword>'
-#    Then User checks that amount of products in wish list are <amountOfProducts>
-#    Examples:
-#      | homePage                            | keyword | amountOfProducts |
-#      | https://www.canadiantire.ca/en.html | cake    | 36               |

@@ -28,6 +28,7 @@ public class DefinitionsSteps {
     CheckoutPage checkoutPage;
     PageFactoryManager pageFactoryManager;
     SignInPage signInPage;
+    AdvancedSearchPage advancedSearchPage;
 
     @Before
     public void testsSetUp() {
@@ -250,8 +251,25 @@ public class DefinitionsSteps {
     }
 
 
-    @Then("User verify that {string} is appeared on sign in page")
-    public void userVerifyThatErrorMessageIsAppearedOnSignInPage(final String error) {
-        Assert.assertTrue(signInPage.getErrorMessageWhenLoginOrPasswordAreIncorrect().contains(error));
+    @Then("User verify that {string} appeared on login page")
+    public void userVerifyErrorMessageAppearedOnLoginPage(final String errorMessage) {
+        Assert.assertTrue(signInPage.getErrorMessageWhenLoginOrPasswordAreIncorrect().contains(errorMessage));
+    }
+
+    @And("User clicks add to watchList button on product page")
+    public void userClicksAddToWatchListButtonOnProductPage() {
+        productPage = pageFactoryManager.getProductPage();
+        productPage.clickOnAddToWatchlistButton();
+    }
+
+    @When("User clicks on advanced search button")
+    public void userClicksOnAdvancedSearchButton() {
+        homePage.clickOnAdvancedSearchButton();
+    }
+
+    @Then("User checks first search  button visibility")
+    public void userChecksFirstSearchButtonVisibility() {
+        advancedSearchPage = pageFactoryManager.getAdvancedSearchPage();
+        Assert.assertTrue(advancedSearchPage.isFirstSearchButtonPresent());
     }
 }

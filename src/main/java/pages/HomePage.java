@@ -7,12 +7,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 
-
 public class HomePage extends BasePage {
     public HomePage(WebDriver driver) {
         super(driver);
     }
+
     private static final long DEFAULT_TIMEOUT = 60;
+
 
     Actions action = new Actions(driver);
     @FindBy(xpath = "//button[@class='gh-ua gh-control']")
@@ -57,51 +58,105 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"gh-minicart-hover\"]")
     private WebElement cartButton;
 
-    public void openHomePage(String url){
+    @FindBy(xpath = "//div[@class='gh-info__title']")
+    private WebElement itemInWatchListPopUp;
+
+    @FindBy(xpath = "//a[@title='Watchlist']")
+    private WebElement watchListButton;
+
+    @FindBy(xpath = "//a[@title='Advanced Search']")
+    private WebElement advancedSearchButton;
+
+    public void clickOnAdvancedSearchButton(){
+        advancedSearchButton.click();
+    }
+
+    public void clickOnWatchListButton() {
+        watchListButton.click();
+    }
+
+    public boolean itemInWatchListPopUpIsPresent() {
+        return itemInWatchListPopUp.isDisplayed();
+    }
+
+    public void openHomePage(String url) {
         driver.get(url);
     }
+
     public void searchByKeyword(final String keyWord) {
         searchField.clear();
         searchField.sendKeys(keyWord);
     }
-    public void clickOnSearchButton(){
+
+    public void clickOnSearchButton() {
         searchButton.click();
     }
-    public void clickOnCartButton(){
+
+    public void clickOnCartButton() {
         cartButton.click();
     }
 
-    public String getSignInNameOnHomePage(){
+    public String getSignInNameOnHomePage() {
         return signInButtonAfterSuccessfulLogin.getText();
     }
-    public boolean isSearchButtonVisible(){return searchButton.isDisplayed();}
-    public boolean isSearchFieldVisible(){ return searchField.isDisplayed();}
-    public boolean isCompanyLogoVisible(){ return companyLogo.isDisplayed();}
-    public boolean isShopByCategoryDropDownListVisible(){ return shopByCategoryDropDownList.isDisplayed();}
-    public boolean isAdvertisementBannerVisible(){return  advertisementBanner.isDisplayed();}
-    public boolean isExplorePopularBrandsButtonVisible(){return explorePopularBrandsButton.isDisplayed();}
-    public boolean isExplorePopularCategoryButtonVisible(){return explorePopularCategoryButton.isDisplayed();}
-    public boolean isSignInButtonVisible(){return signInButton.isDisplayed();}
-    public boolean isRegisterButtonVisible(){return registerButton.isDisplayed();}
-    public boolean isHelpAndContactButtonVisible(){return helpAndContactButton.isDisplayed();}
-    public boolean isTopNavigationBarVisible(){return topNavigationBar.isDisplayed();}
-    public boolean isCartButtonVisible(){return cartButton.isDisplayed();}
-    public boolean isPopupCartIsEmptyVisible(){
+
+    public boolean isSearchButtonVisible() {
+        return searchButton.isDisplayed();
+    }
+
+    public boolean isSearchFieldVisible() {
+        return searchField.isDisplayed();
+    }
+
+    public boolean isCompanyLogoVisible() {
+        return companyLogo.isDisplayed();
+    }
+
+    public boolean isShopByCategoryDropDownListVisible() {
+        return shopByCategoryDropDownList.isDisplayed();
+    }
+
+    public boolean isAdvertisementBannerVisible() {
+        return advertisementBanner.isDisplayed();
+    }
+
+    public boolean isExplorePopularBrandsButtonVisible() {
+        return explorePopularBrandsButton.isDisplayed();
+    }
+
+    public boolean isExplorePopularCategoryButtonVisible() {
+        return explorePopularCategoryButton.isDisplayed();
+    }
+
+    public boolean isSignInButtonVisible() {
+        return signInButton.isDisplayed();
+    }
+
+    public boolean isRegisterButtonVisible() {
+        return registerButton.isDisplayed();
+    }
+
+    public boolean isHelpAndContactButtonVisible() {
+        return helpAndContactButton.isDisplayed();
+    }
+
+    public boolean isTopNavigationBarVisible() {
+        return topNavigationBar.isDisplayed();
+    }
+
+    public boolean isCartButtonVisible() {
+        return cartButton.isDisplayed();
+    }
+
+    public boolean isPopupCartIsEmptyVisible() {
         action.moveToElement(cartButton).build().perform();
-        waitVisibilityOfElement(DEFAULT_TIMEOUT,popupCartIsEmpty);
+        waitVisibilityOfElement(DEFAULT_TIMEOUT, popupCartIsEmpty);
         return popupCartIsEmpty.isDisplayed();
     }
-    public void clickOnSignInButton(){
+
+    public void clickOnSignInButton() {
         signInButton.click();
     }
-
-
-
-
-
-
-
-
 
 
 }

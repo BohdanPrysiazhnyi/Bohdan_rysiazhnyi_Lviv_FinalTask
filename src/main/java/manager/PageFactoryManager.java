@@ -15,4 +15,5 @@ public class PageFactoryManager {
     public CheckoutPage getCheckoutPage(){return new CheckoutPage(driver);}
     public SearchResultPage getSearchResultPage(){return new SearchResultPage(driver);}
     public SignInPage getSignInPage(){return new SignInPage(driver);}
+    public AdvancedSearchPage getAdvancedSearchPage(){return new AdvancedSearchPage(driver);}
 }

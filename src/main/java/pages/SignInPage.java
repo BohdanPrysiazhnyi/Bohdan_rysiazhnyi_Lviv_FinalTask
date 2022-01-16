@@ -11,12 +11,16 @@ public class SignInPage extends BasePage{
 
     @FindBy(xpath = "//input[@id='userid']")
     private WebElement emailOrUserNameTextField;
+
     @FindBy(xpath = "//button[@id='signin-continue-btn']")
     private WebElement continueButton;
+
     @FindBy(xpath = "//input[@id='pass']")
     private WebElement passwordField;
+
     @FindBy(xpath = "//button[@id='sgnBt']")
     private WebElement signInButton;
+
     @FindBy(xpath = "//span[@class='inline-notice__main']")
     private WebElement errorMessageOnLoginPageWhenLoginOrPasswordAreIncorrect;
 
