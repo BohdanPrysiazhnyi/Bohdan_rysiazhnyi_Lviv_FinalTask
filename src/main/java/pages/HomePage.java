@@ -15,6 +15,8 @@ public class HomePage extends BasePage {
     private static final long DEFAULT_TIMEOUT = 60;
 
     Actions action = new Actions(driver);
+    @FindBy(xpath = "//button[@class='gh-ua gh-control']")
+    private WebElement signInButtonAfterSuccessfulLogin;
 
     @FindBy(xpath = "//input[@class='gh-tb ui-autocomplete-input']")
     private WebElement searchField;
@@ -69,7 +71,9 @@ public class HomePage extends BasePage {
         cartButton.click();
     }
 
-
+    public String getSignInNameOnHomePage(){
+        return signInButtonAfterSuccessfulLogin.getText();
+    }
     public boolean isSearchButtonVisible(){return searchButton.isDisplayed();}
     public boolean isSearchFieldVisible(){ return searchField.isDisplayed();}
     public boolean isCompanyLogoVisible(){ return companyLogo.isDisplayed();}

@@ -17,6 +17,12 @@ public class SignInPage extends BasePage{
     private WebElement passwordField;
     @FindBy(xpath = "//button[@id='sgnBt']")
     private WebElement signInButton;
+    @FindBy(xpath = "//span[@class='inline-notice__main']")
+    private WebElement errorMessageOnLoginPageWhenLoginOrPasswordAreIncorrect;
+
+    public String getErrorMessageWhenLoginOrPasswordAreIncorrect(){
+        return errorMessageOnLoginPageWhenLoginOrPasswordAreIncorrect.getText();
+    }
 
     public void enterPassword(final String password){
         passwordField.sendKeys(password);

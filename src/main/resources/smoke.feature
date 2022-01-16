@@ -73,13 +73,41 @@ Feature: Smoke
     And User clicks on sign in button
     When User fill out username field with '<email>' username
     And User clicks continue button
+    And User fill out password field with '<password>'
+    And User clicks on sign in button on sign in page
+    Then User verify that sign in button contains '<loginName>' on home page
+
 
 
 
     Examples:
-      | homePage              | email             | password |
-      | https://www.ebay.com/ | bodacuk@gmail.com | 985236bo |
+      | homePage              | email             | password | loginName |
+      | https://www.ebay.com/ | bodacuk@gmail.com | 985236bo | Богдан    |
 
+  Scenario Outline: Check that user error message appears when user enters the wrong login when sign-in to account
+    Given User opens '<homePage>' page
+    And User clicks on sign in button
+    When User fill out username field with incorrect '<email>' username
+    And User clicks on sign in button on sign in page
+    Then User verify that '<errorMessage>' is appeared on sign in page
+
+
+    Examples:
+      | homePage              | email            | errorMessage             |
+      | https://www.ebay.com/ | bodacukgmail.com | Oops, that's not a match |
+
+  Scenario Outline: Check that user error message appears when user enters the wrong password when sign-in to account
+    Given User opens '<homePage>' page
+    And User clicks on sign in button
+    When User fill out username field with incorrect '<email>' username
+    And User clicks on sign in button on sign in page
+    And User fill out password field with '<password>'
+    And User clicks on sign in button on sign in page
+    Then User verify that '<errorMessage>' is appeared on sign in page
+
+    Examples:
+      | homePage              | email            | password     | errorMessage            |
+      | https://www.ebay.com/ | bodacukgmail.com | 456445464564 | ops, that's not a match |
 
 
 

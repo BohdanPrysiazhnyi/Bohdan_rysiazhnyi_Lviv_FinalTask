@@ -38,10 +38,10 @@ public class DefinitionsSteps {
 
     }
 
-//    @After
-//    public void tearDown() {
-//        driver.quit();
-//    }
+    @After
+    public void tearDown() {
+        driver.quit();
+    }
 
     @Given("User opens {string} page")
     public void openHomePage(final String url){
@@ -226,5 +226,32 @@ public class DefinitionsSteps {
     @And("User clicks continue button")
     public void userClicksContinueButton() {
         signInPage.clickOnContinueButton();
+    }
+
+    @And("User fill out password field with {string}")
+    public void userFillOutPasswordFieldWithPassword(final String password) {
+        signInPage.enterPassword(password);
+    }
+
+    @And("User clicks on sign in button on sign in page")
+    public void userClicksOnSignInButtonOnSignInPage() {
+        signInPage.clickSignInButton();
+    }
+
+    @Then("User verify that sign in button contains {string} on home page")
+    public void userVerifyThatSignInButtonContainsLoginNameOnHomePage(final String loginName) {
+        Assert.assertTrue(homePage.getSignInNameOnHomePage().contains(loginName));
+    }
+
+    @When("User fill out username field with incorrect {string} username")
+    public void userFillOutUsernameFieldWithIncorrectEmailUsername(final String email) {
+        signInPage  = pageFactoryManager.getSignInPage();
+        signInPage.fillOutEmailOrUserNameTextField(email);
+    }
+
+
+    @Then("User verify that {string} is appeared on sign in page")
+    public void userVerifyThatErrorMessageIsAppearedOnSignInPage(final String error) {
+        Assert.assertTrue(signInPage.getErrorMessageWhenLoginOrPasswordAreIncorrect().contains(error));
     }
 }
